@@ -231,7 +231,7 @@ function createChart() {
     const canvas = document.getElementById('myChart');
     const ctx = canvas.getContext('2d');
     const data = {
-        labels: ['Logical List', 'Effective', 'Effective Capacity'],
+        labels: ['Logical List', 'Optimized', 'Effective Capacity'],
         datasets: [
             {
                 label: 'hot tier',
