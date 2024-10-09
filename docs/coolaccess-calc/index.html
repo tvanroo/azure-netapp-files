@@ -183,14 +183,23 @@
                             <input oninput="getResults()" type="text" class="my-1 mr-sm-1 form-control" placeholder="" value="10" aria-label="Volume Size" aria-describedby="Volume Size" id="datasize"></input>
                             <div class="input-group-append btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-primary my-1">
-                                    <input onchange="getResults()" name="tier" type="radio" value="standard" id="standard" checked>Standard</input>
-                                </label>
-                                <label class="btn btn-outline-primary my-1">
-                                    <input onchange="getResults()" name="tier" type="radio" value="premium" id="premium">Premium</input>
-                                </label>
-                                <label class="btn btn-outline-primary my-1">
-                                    <input onchange="getResults()" name="tier" type="radio" value="ultra" id="ultra">Ultra</input>
-                                </label>
+                                <input onclick="getResults()" name="tputfadsunitsd" type="radio" value="%" id="seasadfasdfn" checked>TiBs</input>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span id="volumeSizeLabel" class="my-1 input-group-text">Volume Tier</span>
+                                <div class="input-group-append btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                    <label class="btn btn-outline-primary my-1 col">
+                                        <input onchange="getResults()" name="tier" type="radio" value="standard" id="standard" checked>Standard</input>
+                                    </label>
+                                    <label class="btn btn-outline-primary my-1 col">
+                                        <input onchange="getResults()" name="tier" type="radio" value="premium" id="premium">Premium</input>
+                                    </label>
+                                    <label class="btn btn-outline-primary my-1 col">
+                                        <input onchange="getResults()" name="tier" type="radio" value="ultra" id="ultra">Ultra</input>
+                                    </label>
+                                </div>
                             </div>
                         </div>
         
@@ -273,7 +282,6 @@
                         <canvas id="myChart" width="400" height="400"></canvas>
                     </div>
 </div></div>
-                <br><br>
                 <div class="bg-light text-center border">
                     <h3>Price per GiB Breakdown</h3>
                     <div class="row">
@@ -304,114 +312,108 @@
                
                 <br>
                 
-                <div class="container">
-                    <table class="table">
-                        <!-- Row 1: Full Width - "Detailed Output" -->
-                        <tr>
-                            <td colspan="3" class="text-center borderless">
-                                <h3>Detailed Output</h3>
-                            </td>
-                        </tr>
-                        <!-- Row 2: Full Width - Logical List Price -->
+                <div id="tableout">
+                    <table class='table-bordered table table-sm table-hover'>
+                        <thead class='thead-light'>
+                            <tr>
+                                <th colspan="3" class="text-center borderless">Detailed Output</th>
+                            </tr>
+                        </thead>
                         <tr>
                             <td colspan="3" class="text-center borderless">
                                 <h5>Logical List Price:</h5>
                             </td>
                         </tr>
-                        <!-- Row 3-7: 3 columns with placeholder text in each -->
                         <tr>
                             <td>logical data size (TiB)</td>
-                            <td>Placeholder 2</td>
-                            <td>Placeholder 3</td>
+                            <td id="logicalDataSizeInTiBs1"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>effective data size (TiB)</td>
-                            <td>Placeholder 5</td>
-                            <td>Placeholder 6</td>
+                            <td id="effectiveDataSizeInTiBs1"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>data in hot tier (TiB)</td>
-                            <td>Placeholder 8</td>
-                            <td>Placeholder 9</td>
+                            <td id="dataInHotTier1"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>List price total per month</td>
-                            <td>Placeholder 11</td>
-                            <td>Placeholder 12</td>
+                            <td id="listPriceTotalPerMonth1"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>List price per GiB per month</td>
-                            <td>Placeholder 14</td>
-                            <td>Placeholder 15</td>
+                            <td id="listPricePerGiBPerMonth1"></td>
+                            <td></td>
                         </tr>
-                        <!-- Row 8: Full Width - "Effective Discount Price" -->
                         <tr>
                             <td colspan="3" class="text-center borderless">
-                                <h5>Effective Discount Price</h5>
+                                <h5>Optimized Price</h5>
                             </td>
                         </tr>
-                        <!-- Row 9-13: 3 columns with placeholder text in each -->
                         <tr>
                             <td>logical data size (TiB)</td>
-                            <td>Placeholder 17</td>
-                            <td>Placeholder 18</td>
+                            <td id="logicalDataSizeInTiBs2"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>effective data size (TiB)</td>
-                            <td>Placeholder 20</td>
-                            <td>Placeholder 21</td>
+                            <td id="effectiveDataSizeInTiBs2"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>data in hot tier (TiB)</td>
-                            <td>Placeholder 23</td>
-                            <td>Placeholder 24</td>
+                            <td id="dataInHotTier2"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>Effective price total per month</td>
-                            <td>Placeholder 26</td>
-                            <td>Placeholder 27</td>
+                            <td id="effectivePriceTotalPerMonth2"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>Effective price per GiB per month</td>
-                            <td>Placeholder 29</td>
-                            <td>Placeholder 30</td>
+                            <td id="effectivePricePerGiBPerMonth2"></td>
+                            <td></td>
                         </tr>
-                        <!-- Row 14: Full Width - "Effective Price" -->
                         <tr>
                             <td colspan="3" class="text-center borderless">
                                 <h5>Effective Price</h5>
                             </td>
                         </tr>
-                        <!-- Row 15-19: 3 columns with placeholder text in each -->
                         <tr>
                             <td>logical data size (TiB)</td>
-                            <td>Placeholder 32</td>
-                            <td>Placeholder 33</td>
+                            <td id="logicalDataSizeInTiBs3"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>effective data size (TiB)</td>
-                            <td>Placeholder 35</td>
-                            <td>Placeholder 36</td>
+                            <td id="effectiveDataSizeInTiBs3"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>data in hot tier (TiB)</td>
-                            <td>Placeholder 38</td>
-                            <td>Placeholder 39</td>
+                            <td id="dataInHotTier3"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>Effective price total per month</td>
-                            <td>Placeholder 41</td>
-                            <td>Placeholder 42</td>
+                            <td id="effectivePriceTotalPerMonth3"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>Effective price per GiB per month</td>
-                            <td>Placeholder 44</td>
-                            <td>Placeholder 45</td>
+                            <td id="effectivePricePerGiBPerMonth3"></td>
+                            <td></td>
                         </tr>
                     </table>
-                </div>                        <div class="col">
-                            <canvas id="myChart" width="400" height="400"></canvas>
-                        </div>
+                </div>
+                    
+                    </table>
+                     
                     </div>   
                 </div> 
             </div>
@@ -433,23 +435,5 @@
     
 </body>
 <script>
-var coolslider = $("#ms1").slider()
-    .on('slide', getResults)
-    .on('change', getResults);
-    var coolnessslider = $("#ms3").slider()
-    .on('slide', getResults)
-    .on('change', getResults);
-var retrieveslider = $("#ms2").slider()
-    .on('slide', getResults)
-    .on('change', getResults);
-var dailyretentionslider = $("#ms4").slider()
-    .on('slide', getResults)
-    .on('change', getResults);
-var dailychangeslider = $("#ms5").slider()
-    .on('slide', getResults)
-    .on('change', getResults);
-var customdiscountslider = $("#ms6").slider()
-    .on('slide', getResults)
-    .on('change', getResults);
 </script>
 </html>

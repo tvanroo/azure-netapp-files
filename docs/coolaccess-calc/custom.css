@@ -45,3 +45,9 @@ body {
 .borderless {
     border: none;
 }
+
+/* Additional CSS for button group */
+.btn-group-toggle .btn {
+    flex: 1; /* Make each button take up an equal portion of the available width */
+    text-align: center; /* Center the text within the buttons */
+}

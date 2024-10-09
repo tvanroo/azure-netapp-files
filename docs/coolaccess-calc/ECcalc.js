@@ -503,7 +503,7 @@ function getResults() {
         "East Asia": 0.000089,
         "Southeast Asia": 0.000089,
         "South Africa North": 0.000144
-    }
+    };
     var standardcool_network_rates = {
         "Central US": 0.024600,
         "East US": 0.020000,
@@ -632,18 +632,17 @@ function getResults() {
     console.log("Net Size Without Snaps And Clones: Total Logical TiB:", dataSizeInTiBs);
 
 //Define Rates variables based on Selected Tier
-if (perfTier === "standard") {
-    var before_rate = standard_region_rates[active_region] * discount_percent;
-    var cool_rate = standardcool_region_rates[active_region] * discount_percent;
-    
-    // Calculate the result of before_rate * month_hours
-    var before_rate_month_hours_result = before_rate * month_hours;
-    var cool_rate_month_hours_result = cool_rate * month_hours;
+    if (perfTier === "standard") {
+        var before_rate = standard_region_rates[active_region] * discount_percent;
+        var cool_rate = standardcool_region_rates[active_region] * discount_percent;
+        
+        // Calculate the result of before_rate * month_hours
+        var before_rate_month_hours_result = before_rate * month_hours;
+        var cool_rate_month_hours_result = cool_rate * month_hours;
 
-    // Set the value to the element with ID 'logical_list_price_output'
-    document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(2);
-}
-
+        // Set the value to the element with ID 'logical_list_price_output'
+        document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(2);
+    }
 
     if (perfTier === "premium") {
         var before_rate = premium_region_rates[active_region] * discount_percent;
@@ -656,7 +655,7 @@ if (perfTier === "standard") {
     // Set the value to the element with ID 'logical_list_price_output'
     document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(2);
 
-    };
+    }
 
     if (perfTier === "ultra") {
         before_rate = ultra_region_rates[active_region] * discount_percent;
@@ -667,8 +666,7 @@ if (perfTier === "standard") {
     var cool_rate_month_hours_result = cool_rate * month_hours;
 
     // Set the value to the element with ID 'logical_list_price_output'
-    document.getElementById("logical_list_price_output/hot Cost").innerText = before_rate_month_hours_result.toFixed(2);
-    document.getElementById("cool Cost").innerText = cool_rate_month_hours_result.toFixed(2);
+    document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(2);
 
     };
 
@@ -725,133 +723,33 @@ if (perfTier === "standard") {
         // Total costs with no snaps, divided by total storage size. Shows Cool tier discounts
         document.getElementById("standard_effective_price").innerText = ((total_hot_gib_cost + total_cool_gib_cost + total_network_gib_cost)/(dataSizeInTiBs*1024)).toFixed(5);
         //Total costs with snaps, divided by total storage size including the combined size of all snaps. Shows that snaps represent a huge amount fo storage with a low cost
-        document.getElementById("standard_effective_capacity_price").innerText = + ((total_hot_gib_cost + total_cool_gib_cost + total_cool_snapshot_gib_cost + total_network_gib_cost)/(netSizeWithSnapsAndClonesTotalEffective_TiB*1024)).toFixed(5);
+        document.getElementById("standard_effective_capacity_price").innerText = ((total_hot_gib_cost + total_cool_gib_cost + total_cool_snapshot_gib_cost + total_network_gib_cost)/(netSizeWithSnapsAndClonesTotalEffective_TiB*1024)).toFixed(5);
+   
+   //Make variables a unique ID so it can be reused
+   document.getElementById('logicalDataSizeInTiBs1').innerText = dataSizeInTiBs.toFixed(2) + " TiBs";
+   document.getElementById('logicalDataSizeInTiBs2').innerText = dataSizeInTiBs.toFixed(2) + " TiBs";
+   document.getElementById('logicalDataSizeInTiBs3').innerText = dataSizeInTiBs.toFixed(2) + " TiBs";
 
-    // *******************************Got to Here ******************************
-    document.getElementById("datasize").classList.remove('text-danger');
-    document.getElementById("datasize").classList.remove('text-primary');
+   //Make variables a unique ID so it can be reused
+   document.getElementById('effectiveDataSizeInTiBs1').innerText = dataSizeInTiBs.toFixed(2) + " TiBs";
+   document.getElementById('effectiveDataSizeInTiBs2').innerText = dataSizeInTiBs.toFixed(2) + " TiBs";
+   document.getElementById('effectiveDataSizeInTiBs3').innerText = netSizeWithSnapsAndClonesTotalEffective_TiB.toFixed(2) + " TiBs";
+   
+    //Make variables a unique ID so it can be reused
+    document.getElementById('dataInHotTier1').innerText = dataSizeInTiBs.toFixed(2) + " TiBs";
+    document.getElementById('dataInHotTier2').innerText = (total_hot_gib/1024).toFixed(2) + " TiBs";
+    document.getElementById('dataInHotTier3').innerText = (total_hot_gib/1024).toFixed(2) + " TiBs";
 
-    if (isNaN(dataSizeInTiBs) || dataSizeInTiBs < min_dataSizeInTiBs || dataSizeInTiBs > max_dataSizeInTiBs) {
-        document.getElementById("datasize").style.borderColor = "red";
+    //Make variables a unique ID so it can be reused
+    document.getElementById('listPriceTotalPerMonth1').innerText = "$" + (dataSizeInTiBs*before_rate_month_hours_result*1024).toFixed(2) +"/Month";
+    document.getElementById('effectivePriceTotalPerMonth2').innerText = "$" + (total_hot_gib_cost + total_cool_gib_cost + total_network_gib_cost).toFixed(2) +"/Month";
+    document.getElementById('effectivePriceTotalPerMonth3').innerText = "$" + (total_hot_gib_cost + total_cool_gib_cost + total_cool_snapshot_gib_cost + total_network_gib_cost).toFixed(2) +"/Month";
 
-        document.getElementById("ct_total_cost").innerText = "";
-        document.getElementById("ct_standard_cost").innerText = "";
-        document.getElementById("ct_cool_cost").innerText = "";
-        document.getElementById("standard_total_cost").innerText = "";
-        document.getElementById("ct_network_month2").innerText = "";
-        document.getElementById("total_savings").innerText = "";
-       
-    } else if (monthlyRetreive < 0 || monthlyRetreive > 100) {
-        document.getElementById("retrieve").style.borderColor = "red";
-
-        document.getElementById("ct_total_cost").innerText = "";
-        document.getElementById("ct_standard_cost").innerText = "";
-        document.getElementById("ct_cool_cost").innerText = "";
-        document.getElementById("standard_total_cost").innerText = "";
-        document.getElementById("ct_network_month2").innerText = "";
-        document.getElementById("total_savings").innerText = "";
-    } else {
-        document.getElementById("datasize").style.borderColor = "lightgray";
-        if (dataSizeInGiBs < minimum_pool_size) {
-            pool_size = minimum_pool_size;
-            standardstandardcost = pool_size * before_rate * month_hours;
-        } else {
-            pool_size = dataSizeInGiBs;
-            standardstandardcost = dataSizeInGiBs * before_rate * month_hours;
-        }
-
-        
+    //Make variables a unique ID so it can be reused
+    document.getElementById('listPricePerGiBPerMonth1').innerText = "$" + before_rate_month_hours_result.toFixed(3) +"/GiB/Month";
+    document.getElementById('effectivePricePerGiBPerMonth2').innerText = "$" + ((total_hot_gib_cost + total_cool_gib_cost + total_network_gib_cost)/(dataSizeInTiBs*1024)).toFixed(3) +"/GiB/Month";
+    document.getElementById('effectivePricePerGiBPerMonth3').innerText = "$" + ((total_hot_gib_cost + total_cool_gib_cost + total_cool_snapshot_gib_cost + total_network_gib_cost)/(netSizeWithSnapsAndClonesTotalEffective_TiB*1024)).toFixed(3) +"/GiB/Month";
 
 
-        hot_hours = (7 * 24) % month_hours //how many hours of the month are hot
-        cool_hours = month_hours - hot_hours; //how many hours of the month are cool
 
-        month0_standard_cost = (dataSizeInGiBs * before_rate) * month_hours
-
-        month12_storedon_cool = (dataSizeInGiBs * (cool_percent)); //- (dataSizeInGiBs * (cool_percent)); //* (monthlyRetreive/100)); //how much data is stored on cool
-        
-        month11_standard_cost = (dataSizeInGiBs * before_rate) * hot_hours; //first portion of month one stored on hot
-        month12_standard_cost = ((pool_size - month12_storedon_cool) * before_rate) * cool_hours; //second portion of month one
-
-        ctstandardcostmonth1 = month11_standard_cost + month12_standard_cost;
-
-        month12_cool_cost = (month12_storedon_cool * cool_rate) * cool_hours; //second half of month one
-
-        ctcoolcostmonth1 = month12_cool_cost;
-
-        egresscost =  month12_storedon_cool * standardcool_network_rates[active_region];                  
-
-        retrievecost = (dataSizeInGiBs * (cool_percent) * (monthlyRetreive/100)) * standardcool_network_rates[active_region];
-        
-        month2_storedon_cool = (dataSizeInGiBs * (cool_percent)) - (dataSizeInGiBs * (cool_percent)) * monthlyRetreive/100; //month two accounting for data brought back previous month
-        //month2_storedon_cool = (dataSizeInGiBs * (cool_percent)); //how much data is stored on cool
-        month2_standard_cost = (pool_size - month2_storedon_cool) * before_rate * month_hours;
-
-        ctstandardcostmonth2 = month2_standard_cost;
-        
-        month2_cool_cost = month2_storedon_cool * cool_rate * month_hours;
-
-        ctcoolcostmonth2 =  month2_cool_cost;
-
-        totalnetwork = egresscost; //+ retrievecost;
-        cttotalcostmonth1 = ctstandardcostmonth1 + ctcoolcostmonth1 + totalnetwork;
-
-        cttotalcostmonth2 = month2_cool_cost + month2_standard_cost + retrievecost;
-
-        totalsavings = standardstandardcost - cttotalcostmonth2;
-        
-        percent_savings = (((standardstandardcost - cttotalcostmonth2) / standardstandardcost) * 100).toFixed(0)
-
-        document.getElementById("ct_total_cost").innerText = '$' + cttotalcostmonth1.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("ct_total_cost_month2").innerText = '$' + cttotalcostmonth2.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("ct_standard_cost").innerText = '$' + ctstandardcostmonth1.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("ct_standard_cost_month2").innerText = '$' + ctstandardcostmonth2.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("ct_cool_cost").innerText = '$' + ctcoolcostmonth1.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("ct_cool_cost_month2").innerText = '$' + ctcoolcostmonth2.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("standard_total_cost").innerText = '$' + month0_standard_cost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("ct_network_month2").innerText = '$' + retrievecost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        document.getElementById("ct_network_month1").innerText = '$' + totalnetwork.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        if (totalsavings > 0) {
-            document.getElementById("total_savings_1year").classList.remove('text-danger');
-            document.getElementById("total_savings_1year").classList.add('text-success');
-            document.getElementById("total_savings_2year").classList.remove('text-danger');
-            document.getElementById("total_savings_2year").classList.add('text-success');
-            document.getElementById("total_savings_3year").classList.remove('text-danger');
-            document.getElementById("total_savings_3year").classList.add('text-success');
-            document.getElementById("total_savings").classList.remove('text-danger');
-            document.getElementById("total_savings").classList.add('text-success');
-        } else {
-            document.getElementById("total_savings_1year").classList.remove('text-success');
-            document.getElementById("total_savings_1year").classList.add('text-danger');
-            document.getElementById("total_savings_2year").classList.remove('text-success');
-            document.getElementById("total_savings_2year").classList.add('text-danger');
-            document.getElementById("total_savings_3year").classList.remove('text-success');
-            document.getElementById("total_savings_3year").classList.add('text-danger');
-            document.getElementById("total_savings").classList.remove('text-success');
-            document.getElementById("total_savings").classList.add('text-danger');
-        }
-        totalsavings_1year = totalsavings * 12;
-        totalsavings_2year = totalsavings * 24;
-        totalsavings_3year = totalsavings * 36;
-
-        document.getElementById("total_savings_1year").innerText = '$' + totalsavings_1year.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '  (' + percent_savings + '%)';
-        document.getElementById("total_savings_2year").innerText = '$' + totalsavings_2year.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '  (' + percent_savings + '%)';
-        document.getElementById("total_savings_3year").innerText = '$' + totalsavings_3year.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '  (' + percent_savings + '%)';
-        document.getElementById("total_savings").innerText = '$' + totalsavings.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '  (' + percent_savings + '%)';
-
-        document.getElementById("logical_list_price").innerText = '$' + standardstandardcost.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-
-        standardwithout = month0_standard_cost.toFixed(2);
-        coolwithout = 0;
-        standardwith = ctstandardcostmonth1.toFixed(2);
-        standardwithmonth2 = ctstandardcostmonth2.toFixed(2);
-        coolwith = ctcoolcostmonth1.toFixed(2);
-        coolwithmonth2 = ctcoolcostmonth2.toFixed(2);
-        retrievewith = retrievecost.toFixed(2);
-        egresswith = totalnetwork.toFixed(2);
-
-        chartlabels = [labelOne, labelTwo, labelThree];
-        
-        updateChart(chart,standardwithmonth2,standardwith,standardwithout,coolwithmonth2,coolwith,coolwithout,retrievewith,egresswith,chartlabels);
     }        
-}
