@@ -641,7 +641,7 @@ function getResults() {
         var cool_rate_month_hours_result = cool_rate * month_hours;
 
         // Set the value to the element with ID 'logical_list_price_output'
-        document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(2);
+        document.getElementById("logical_list_price_output").innerText = "$" + before_rate_month_hours_result.toFixed(2);
     }
 
     if (perfTier === "premium") {
@@ -653,7 +653,7 @@ function getResults() {
     var cool_rate_month_hours_result = cool_rate * month_hours;
 
     // Set the value to the element with ID 'logical_list_price_output'
-    document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(2);
+    document.getElementById("logical_list_price_output").innerText = "$" + before_rate_month_hours_result.toFixed(2);
 
     }
 
@@ -666,7 +666,7 @@ function getResults() {
     var cool_rate_month_hours_result = cool_rate * month_hours;
 
     // Set the value to the element with ID 'logical_list_price_output'
-    document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(2);
+    document.getElementById("logical_list_price_output").innerText = "$" + before_rate_month_hours_result.toFixed(2);
 
     };
 
@@ -719,11 +719,11 @@ function getResults() {
         var network_rate = standardcool_network_rates[active_region];
         //Calculate Effective Prices
         //List price
-        document.getElementById("logical_list_price_output").innerText = before_rate_month_hours_result.toFixed(5);
+        document.getElementById("logical_list_price_output").innerText = "$" + before_rate_month_hours_result.toFixed(5);
         // Total costs with no snaps, divided by total storage size. Shows Cool tier discounts
-        document.getElementById("standard_effective_price").innerText = ((total_hot_gib_cost + total_cool_gib_cost + total_network_gib_cost)/(dataSizeInTiBs*1024)).toFixed(5);
+        document.getElementById("standard_effective_price").innerText = "$" + ((total_hot_gib_cost + total_cool_gib_cost + total_network_gib_cost)/(dataSizeInTiBs*1024)).toFixed(5);
         //Total costs with snaps, divided by total storage size including the combined size of all snaps. Shows that snaps represent a huge amount fo storage with a low cost
-        document.getElementById("standard_effective_capacity_price").innerText = ((total_hot_gib_cost + total_cool_gib_cost + total_cool_snapshot_gib_cost + total_network_gib_cost)/(netSizeWithSnapsAndClonesTotalEffective_TiB*1024)).toFixed(5);
+        document.getElementById("standard_effective_capacity_price").innerText = "$" + ((total_hot_gib_cost + total_cool_gib_cost + total_cool_snapshot_gib_cost + total_network_gib_cost)/(netSizeWithSnapsAndClonesTotalEffective_TiB*1024)).toFixed(5);
    
    //Make variables a unique ID so it can be reused
    document.getElementById('logicalDataSizeInTiBs1').innerText = dataSizeInTiBs.toFixed(2) + " TiBs";
